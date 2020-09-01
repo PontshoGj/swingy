@@ -3,14 +3,14 @@ package tracker;
 import java.sql.*;
 
 public class Db{
-    private static final String DATA_BASE_URL = "jdbc:sqlite::players.db";
+    private static final String DATA_BASE_URL = "jdbc:sqlite::players.db.accdb";
     private static Connection connection;
 
 
     //function to create connection the database
     public static void connect(){
 
-        String url = "jdbc:sqlite:/tracker/players.db";
+        String url = "jdbc:sqlite:/tracker/players.db.accdb";
 
         try (
             // Class.forName("org.sqlite.JDBC");
