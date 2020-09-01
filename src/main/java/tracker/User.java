@@ -2,6 +2,7 @@ package tracker;
 
 import data.*;
 import java.util.Scanner;
+import java.sql.*;  
 
 public class User{
     public void createUser(){
@@ -14,7 +15,11 @@ public class User{
     }
 
     public void options(){
+        Db db = new Db();
+        db.connect();
+        int i = 0;
         System.out.println("Enter your name: ");
+        
         Scanner inputname = new Scanner(System.in);
         String name = inputname.nextLine();
         System.out.println("Classes:\tattack\tdefense\thp");
@@ -30,52 +35,41 @@ public class User{
         switch (heroClass){
             case "warrior":{
                 createHero(name+":warrior:40:20:100");
-                // person.createHero("attack:40");
-                // person.createHero("defence:20");
-                // person.createHero("hp:100");
                 createHero("");
+                // i = db.newPlayer(name, "warrior", 40, 20, 100);
                 break;
             }
             case "shaman":{
                 createHero(name+":shaman:30:15:90");
-                // person.createHero("attack:30");
-                // person.createHero("defence:15");
-                // person.createHero("hp:90");
                 createHero("");
+                // i = db.newPlayer(name, "shaman", 30, 15, 90);
                 break;
             }
             case "priest":{
                 createHero(name+":priest:25:25:90");
-                // person.createHero("attack:25");
-                // person.createHero("defence:25");
-                // person.createHero("hp:90");
                 createHero("");
+                // i = db.newPlayer(name, "priest", 25, 25, 90);
                 break;
             }
             case "paladin":{
                 createHero(name+":paladin:40:30:120");
-                // person.createHero("attack:40");
-                // person.createHero("defence:30");
-                // person.createHero("hp:120");
                 createHero("");
+                // i = db.newPlayer(name, "paladin",40, 30, 120);
                 break;
             }
             case "mage":{
                 createHero(name+":mage:45:10:80");
-                // person.createHero("attack:45");
-                // person.createHero("defence:10");
-                // person.createHero("hp:80");
                 createHero("");
+                // i = db.newPlayer(name, "mage",45, 10, 80);
                 break;
             }
             case "hunter":{
                 createHero(name+":hunter:25:20:110");
-                // person.createHero("attack:25");
-                // person.createHero("defence:20");
-                // person.createHero("hp:110");
                 createHero("");
+                // i = db.newPlayer(name, "hunter", 25, 20, 110);
                 break;
             }
         }
+        System.out.println(i);
     }
 }
