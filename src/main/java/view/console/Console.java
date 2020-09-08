@@ -7,6 +7,7 @@ import model.data.*;
 import view.gui.*;
 
 public class Console {
+    private static Db       conn = new Db(); 
 
     public void start (){
         System.out.println("u -- New user: ");
@@ -21,6 +22,7 @@ public class Console {
                 break;
             }
             case "s":
+                selecUser();
                 System.exit(1);
                 break;
             case "v":{
@@ -38,11 +40,15 @@ public class Console {
         String name = inputname.nextLine();
         return name;
     }
-    
+
     public String userClass(){
         
         Scanner inputclass = new Scanner(System.in);
         String heroClass = inputclass.nextLine();
         return heroClass;
+    }
+
+    public void selecUser(){
+        conn.getPlayers();
     }
 }

@@ -17,7 +17,7 @@ public class Control {
     private static User     person = new User(); 
     private static Control  con = null;
     private static int      guistage = 0;
-    private static int      userid = 0;
+    private static int      userid;
 
     private Control(){}
 
@@ -75,7 +75,7 @@ public class Control {
         switch (i){
             case 0:{
                 username = console.newUser();
-                person.UserName(username);
+                userid = person.UserName(username);
                 i++;
                 break;
             }

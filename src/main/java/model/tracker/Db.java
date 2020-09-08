@@ -103,6 +103,35 @@ public class Db{
     }
     //function to get player info from exiting players
 
+    public static void getPlayers() {
+        // PreparedStatement pstmt = null;
+        try { 
+            String sqlQuery = "SELECT * FROM player";
+            // PreparedStatement pstmt = getConnection().prepareStatement(sqlQuery); 
+            // pstmt.setString(1, classname);
+            // pstmt.setInt(2, attack);
+            // pstmt.setInt(3, defence);
+            // pstmt.setInt(4, hp);
+            // pstmt.setInt(5, id);
+            // pstmt.executeUpdate();
 
+            Statement  stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+            // if (rs.next())
+                // id = rs.getInt("seq");
+            while(rs.next()){
+
+                System.out.println(rs.getInt("id") + "\t" + rs.getString("name") + "\t" + 
+                                    rs.getString("classname") + "\t" + 
+                                    rs.getInt("attack") + "\t" + 
+                                    rs.getInt("defence") + "\t" +
+                                    rs.getInt("hp") + "\t" +
+                                    rs.getInt("level") + "\t" +
+                                    rs.getInt("xp"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     //function to update player info during game play
 }
