@@ -8,7 +8,7 @@ public class Logs{
     private static Logs log = new Logs();
     public Logs(){
         try{
-            File outputFile = new File("../src/main/java/tracker/userdata.txt");
+            File outputFile = new File("../src/main/java/model/tracker/userdata.txt");
             outputFile.createNewFile();
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -22,7 +22,7 @@ public class Logs{
     public void wirteLog(String info){
         try{
             BufferedWriter out = new BufferedWriter( 
-                   new FileWriter("../src/main/java/tracker/userdata.txt", true)); 
+                   new FileWriter("../src/main/java/model/tracker/userdata.txt", true)); 
             out.write(info + "\n"); 
             out.close(); 
         }catch (IOException e){

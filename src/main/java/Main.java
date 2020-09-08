@@ -1,8 +1,7 @@
 package src.main.java;
 
 // import javax.swing.*;
-import gui.*;
-import console.*;
+import control.Control;
 
 public class Main {
 
@@ -10,14 +9,9 @@ public class Main {
         if (args.length != 1 || (!args[0].equals("console") && !args[0].equals("gui"))) {
             System.out.println("Usage: program console | gui");
             System.exit(1);
-        }else if (args[0].equals("gui")){
-            // System.out.println("good");
-            Gui gui = new Gui();
-            gui.start();
-        }else{
-            Console console = new Console();
-            console.start();
         }
+        Control game = Control.getInc();
+        game.start(args[0]);
 
     }
 }

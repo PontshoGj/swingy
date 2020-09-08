@@ -1,8 +1,9 @@
-package gui;
+package view.gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import control.*;
 
 public class Gui extends JFrame {
 
@@ -33,12 +34,13 @@ public class Gui extends JFrame {
     private static JFrame       frame = new JFrame("My First GUI");
  
     public void Gui(){
-
-    }
-    public void start(){
-        // f.add(frame);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
+    }
+
+    public void start(){
+        // f.add(frame);
+
         this.getContentPane().setLayout(new GridLayout(3, 1)); // Adds Button to content pane of frame
 
         // Adds Button to content pane of frame
@@ -53,7 +55,7 @@ public class Gui extends JFrame {
         // Adds Button to content pane of frame
         SelectButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("b");
+                SelectUser();
             }
         });
         this.getContentPane().add(SelectButton); 
@@ -61,7 +63,8 @@ public class Gui extends JFrame {
         // Adds Button to content pane of frame
         SwitchButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("h");
+                // System.out.println("h");
+                SwitchViews();
             }
         });
         this.getContentPane().add(SwitchButton); 
@@ -72,13 +75,18 @@ public class Gui extends JFrame {
     
     public void NewUser(){
         this.getContentPane().removeAll();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
+        
         this.repaint();
         this.getContentPane().add(NameLabel); // Adds Button to content pane of frame
         this.getContentPane().add(NameTextField); // Adds Button to content pane of frame
+
         NextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // System.out.println("d");
                 NewClass();
+                Control game = Control.getInc();
+                game.updateName("Pontsho");
             }
         });
         this.getContentPane().add(NextButton); // Adds Button to content pane of frame
@@ -94,8 +102,36 @@ public class Gui extends JFrame {
         // ClassLabel.setCellSelectionEnabled(true);  
         this.getContentPane().add(sp); // Adds Button to content pane of frame
         this.getContentPane().add(ClassTextField); // Adds Button to content pane of frame
+
+        StartButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                Control game = Control.getInc();
+                game.updateClass("mage");
+            }
+        });
         this.getContentPane().add(StartButton); // Adds Button to content pane of frame
+
         this.setVisible(true);
 
+    }
+
+    public void SelectUser(){
+        this.getContentPane().removeAll();
+        this.repaint(); 
+    }
+    
+    public void SwitchViews(){
+        this.getContentPane().removeAll();
+        this.repaint(); 
+
+        this.setVisible(false);
+    }
+    
+    public String getUserName(){
+        return ("Pontsho");
+    }
+    
+    public String getUserClass(){
+        return "mage";
     }
 }
