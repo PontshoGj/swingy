@@ -35,20 +35,22 @@ public class Control {
             views = "console";
             console.start();
         }
-        while (i < 2){
-            switch (views){
-                case "gui":{
-                    guiview();
-                    break;
-                }
-                case "console":{
-                    consoleview();
-                    break;
-                }
-            }
-            if (views == null)
-                break;
-        }
+        // while (i < 2){
+        //     switch (views){
+        //         case "gui":{
+        //             guiview();
+        //             break;
+        //         }
+        //         case "console":{
+        //             consoleview();
+        //             break;
+        //         }
+        //     }
+        //     if (views == null)
+        //         break;
+        // }
+        GameControl game = new GameControl();
+        game.level(3);
 
     }
     

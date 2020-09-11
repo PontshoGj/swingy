@@ -51,4 +51,8 @@ public class Console {
     public void selecUser(){
         conn.getPlayers();
     }
+
+    public void move(){
+        
+    }
 }

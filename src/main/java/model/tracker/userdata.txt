@@ -52,3 +52,9 @@ mage:45:10:80
 Pontsho
 mage:45:10:80
 
+Pontsho
+mage:45:10:80
+
+shman
+priest:25:25:90
+
