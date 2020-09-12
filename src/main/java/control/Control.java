@@ -49,8 +49,8 @@ public class Control {
         //     if (views == null)
         //         break;
         // }
-        GameControl game = new GameControl();
-        game.level(3);
+        GameControl game = GameControl.getInc();
+        game.level(1);
 
     }
     
