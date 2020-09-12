@@ -58,3 +58,27 @@ mage:45:10:80
 shman
 priest:25:25:90
 
+pontsho
+mage:45:10:80
+
+Pontsho
+mage:45:10:80
+
+p
+mage:45:10:80
+
+po
+mage:45:10:80
+
+po
+mage:45:10:80
+
+po
+mage:45:10:80
+
+poi
+mage:45:10:80
+
+pon
+mage:45:10:80
+

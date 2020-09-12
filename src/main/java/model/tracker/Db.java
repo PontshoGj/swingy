@@ -93,10 +93,6 @@ public class Db{
             pstmt.setInt(5, id);
             pstmt.executeUpdate();
 
-            // Statement  stmt = getConnection().createStatement();
-            // ResultSet rs = stmt.executeQuery("SELECT seq FROM sqlite_sequence WHERE name='player'");
-            // if (rs.next())
-                // id = rs.getInt("seq");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -107,18 +103,9 @@ public class Db{
         // PreparedStatement pstmt = null;
         try { 
             String sqlQuery = "SELECT * FROM player";
-            // PreparedStatement pstmt = getConnection().prepareStatement(sqlQuery); 
-            // pstmt.setString(1, classname);
-            // pstmt.setInt(2, attack);
-            // pstmt.setInt(3, defence);
-            // pstmt.setInt(4, hp);
-            // pstmt.setInt(5, id);
-            // pstmt.executeUpdate();
 
             Statement  stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
-            // if (rs.next())
-                // id = rs.getInt("seq");
             while(rs.next()){
 
                 System.out.println(rs.getInt("id") + "\t" + rs.getString("name") + "\t" + 
@@ -134,4 +121,20 @@ public class Db{
         }
     }
     //function to update player info during game play
+
+
+    public static String [] getPlayInfo(int id) {
+        // PreparedStatement pstmt = null;
+        try { 
+            String sqlQuery = "SELECT * FROM player WHERE id = " + id;
+
+            Statement  stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+            if (rs.next())
+                return (new String []{rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + "",});
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }

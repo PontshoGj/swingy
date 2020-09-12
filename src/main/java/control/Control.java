@@ -18,7 +18,9 @@ public class Control {
     private static Control  con = null;
     private static int      guistage = 0;
     private static int      userid;
-
+    private static int      level = 0;
+    private static String [] info = null;
+    private static GameControl game = GameControl.getInc();
     private Control(){}
 
     public static Control getInc(){
@@ -35,22 +37,25 @@ public class Control {
             views = "console";
             console.start();
         }
-        // while (i < 2){
-        //     switch (views){
-        //         case "gui":{
-        //             guiview();
-        //             break;
-        //         }
-        //         case "console":{
-        //             consoleview();
-        //             break;
-        //         }
-        //     }
-        //     if (views == null)
-        //         break;
-        // }
-        GameControl game = GameControl.getInc();
-        game.level(1);
+        while (i < 3){
+            switch (views){
+                case "gui":{
+                    guiview();
+                    break;
+                }
+                case "console":{
+                    consoleview();
+                    break;
+                }
+            }
+            if (views == null)
+                break;
+        }
+
+        // GameControl game = GameControl.getInc();
+        // game.level(1);
+        // game.moveUp();
+        // game.moveDown();
 
     }
     
@@ -84,9 +89,29 @@ public class Control {
             case 1:{
                 person.options();
                 userclass = console.userClass();
-                person.UserClass(userclass, userid);
+                info = person.UserClass(userclass, userid);
+                level = Integer.parseInt(info[5]);
+                // System.out.println(info[5]);
                 i++;
                 break;
+            }
+            case 2:{
+                game.level(level);
+                while (game.getPlay()){
+                    char m = console.move();
+                    if (m == 'n')
+                        game.moveUp();
+                    else if (m == 's')
+                        game.moveDown();
+                    else if (m == 'e')
+                        game.moveLeft();
+                    else if (m == 'w')
+                        game.moveRight();
+                    else
+                        System.out.println("choose");
+                }
+                i++;
+                
             }
         }
     }

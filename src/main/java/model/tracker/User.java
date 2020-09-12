@@ -19,12 +19,12 @@ public class User{
 
     public int UserName(String name){
         int i  = conn.newPlayer(name);
-        System.out.println(i);
+        // System.out.println(i);
         log.wirteLog(name);
         return i;
     }
 
-    public void UserClass(String userclass, int id){
+    public String [] UserClass(String userclass, int id){
         switch (userclass){
             case "warrior":{
                 conn.insertClass(id,"warrior", 40, 20, 100);
@@ -64,6 +64,7 @@ public class User{
                 break;
             }
         }
+        return conn.getPlayInfo(id);
     }
 
     public void options(){

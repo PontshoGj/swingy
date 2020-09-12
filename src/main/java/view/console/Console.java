@@ -5,9 +5,14 @@ import java.util.Scanner;
 
 import model.data.*;
 import view.gui.*;
+import control.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Console {
-    private static Db       conn = new Db(); 
+    private static Db       conn = new Db();
+    private static GameControl game = GameControl.getInc();
 
     public void start (){
         System.out.println("u -- New user: ");
@@ -52,7 +57,14 @@ public class Console {
         conn.getPlayers();
     }
 
-    public void move(){
-        
+    public char move(){
+        int Y = game.getPositionY();
+        int X = game.getPositionX();
+        System.out.println("Your current position is: " + Y + ", " + X);
+        System.out.println("Press n or s or e or w to move:");
+        Scanner inputclass = new Scanner(System.in);
+        char heroClass = inputclass.next().charAt(0);
+
+        return (heroClass);
     }
 }
