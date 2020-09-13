@@ -50,7 +50,7 @@ public class GameControl {
         start.add(new int[]{newValues, oldValue});
         if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == 9 || start.get(0)[1] == 9)
             play = false;
-        System.out.println(start.get(0)[0]);
+        // System.out.println(start.get(0)[0]);
     }
 
     public static void moveDown (){
@@ -60,7 +60,7 @@ public class GameControl {
         start.add(new int[]{newValues, oldValue});
         if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt)
             play = false;
-        System.out.println(start.get(0)[0]);    
+        // System.out.println(start.get(0)[0]);    
     }
 
     public static void moveLeft (){
@@ -68,9 +68,9 @@ public class GameControl {
         int oldValue = start.get(0)[0];
         start = new ArrayList<>();
         start.add(new int[]{oldValue, newValues});
-        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == 9 || start.get(0)[1] == 9)
+        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == limitVirt || start.get(0)[1] == limitVirt)
             play = false;
-        System.out.println(start.get(0)[1]);
+        // System.out.println(start.get(0)[1]);
     }
 
     public static void moveRight (){
@@ -78,8 +78,8 @@ public class GameControl {
         int oldValue = start.get(0)[0];
         start = new ArrayList<>();
         start.add(new int[]{oldValue, newValues});
-        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == 9 || start.get(0)[1] == 9)
+        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == limitVirt || start.get(0)[1] == limitVirt)
             play = false;
-        System.out.println(start.get(0)[1]);
+        // System.out.println(start.get(0)[1]);
     }
 }

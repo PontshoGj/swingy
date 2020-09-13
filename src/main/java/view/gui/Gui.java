@@ -15,6 +15,10 @@ public class Gui extends JFrame {
     private static JButton      CreateButton = new JButton("Create new user");
     private static JButton      SelectButton = new JButton("Select from list");
     private static JButton      SwitchButton = new JButton("Switch to Console"); 
+    private static JButton      NButton = new JButton("Move North"); 
+    private static JButton      SButton = new JButton("Move South"); 
+    private static JButton      WButton = new JButton("Move West"); 
+    private static JButton      EButton = new JButton("Move East"); 
     private static JButton      NextButton = new JButton("Next"); 
     private static JButton      StartButton = new JButton("Start"); 
     private static JLabel       NameLabel = new JLabel("Enter a name");
@@ -32,7 +36,8 @@ public class Gui extends JFrame {
     private static JTable       ClassTable = new JTable(data, column);
     private static JScrollPane  sp = new JScrollPane(ClassTable);    
     private static JFrame       frame = new JFrame("My First GUI");
- 
+    private static GameControl  game = GameControl.getInc();
+    private static Control      control = Control.getInc();
     public void Gui(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
@@ -40,7 +45,8 @@ public class Gui extends JFrame {
 
     public void start(){
         // f.add(frame);
-
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
         this.getContentPane().setLayout(new GridLayout(3, 1)); // Adds Button to content pane of frame
 
         // Adds Button to content pane of frame
@@ -85,8 +91,7 @@ public class Gui extends JFrame {
         NextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 NewClass();
-                Control game = Control.getInc();
-                game.updateName("Pontsho");
+                control.updateName("Pontsho");
             }
         });
         this.getContentPane().add(NextButton); // Adds Button to content pane of frame
@@ -96,6 +101,8 @@ public class Gui extends JFrame {
 
     public void NewClass(){
         this.getContentPane().removeAll();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
         this.repaint();
         this.getContentPane().setLayout(new GridLayout(4, 1)); // Adds Button to content pane of frame
         this.getContentPane().add(ClassLabel); // Adds Button to content pane of frame
@@ -105,14 +112,60 @@ public class Gui extends JFrame {
 
         StartButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                Control game = Control.getInc();
-                game.updateClass("mage");
+                control.updateClass("mage");
+                game.level(control.getlevel());
+                Gameplay();
             }
         });
         this.getContentPane().add(StartButton); // Adds Button to content pane of frame
 
         this.setVisible(true);
 
+    }
+    public void Gameplay(){
+        this.getContentPane().removeAll();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
+        this.repaint();
+        JLabel       PositionLabel = new JLabel("Your Position is " + game.getPositionY() + ", " + game.getPositionX());
+        this.getContentPane().add(PositionLabel); // Adds Button to content pane of frame
+        NButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                game.moveUp();
+                Gameplay();
+                if (!game.getPlay())
+                    System.exit(0);
+            }
+        });
+        this.getContentPane().add(NButton); // Adds Button to content pane of frame
+        SButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                game.moveDown();
+                if (!game.getPlay())
+                    System.exit(0);
+                Gameplay();
+            }
+        });
+        this.getContentPane().add(SButton); // Adds Button to content pane of frame
+        WButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                game.moveLeft();
+                if (!game.getPlay())
+                    System.exit(0);
+                Gameplay();
+            }
+        });
+        this.getContentPane().add(WButton); // Adds Button to content pane of frame
+        EButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                game.moveRight();
+                if (!game.getPlay())
+                    System.exit(0);
+                Gameplay();
+            }
+        });
+        this.getContentPane().add(EButton); // Adds Button to content pane of frame
+        this.setVisible(true);
     }
 
     public void SelectUser(){

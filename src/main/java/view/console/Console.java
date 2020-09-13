@@ -8,12 +8,14 @@ import view.gui.*;
 import control.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 
 public class Console {
-    private static Db       conn = new Db();
-    private static GameControl game = GameControl.getInc();
-
+    private static Db           conn = new Db();
+    private static GameControl  game = GameControl.getInc();
+    @NotNull(message = "Name cannot be null")
+    private String              name;
     public void start (){
         System.out.println("u -- New user: ");
         System.out.println("s -- Select user: ");
@@ -42,7 +44,7 @@ public class Console {
 
         System.out.println("Enter your name: ");
         Scanner inputname = new Scanner(System.in);
-        String name = inputname.nextLine();
+        name = inputname.nextLine();
         return name;
     }
 

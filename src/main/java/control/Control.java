@@ -31,7 +31,6 @@ public class Control {
     public static void start(String args) {
         if (args.equals("gui")){
             views = "gui";
-            // System.out.println("good");
             gui.start();
         }else{
             views = "console";
@@ -39,41 +38,27 @@ public class Control {
         }
         while (i < 3){
             switch (views){
-                case "gui":{
-                    guiview();
-                    break;
-                }
                 case "console":{
                     consoleview();
                     break;
                 }
             }
-            if (views == null)
+            if (views == null || views == "gui")
                 break;
         }
-
-        // GameControl game = GameControl.getInc();
-        // game.level(1);
-        // game.moveUp();
-        // game.moveDown();
-
     }
     
     public static void guiview(){
         switch (i){
             case 0:{
                 gui.NewUser();
-                if (guistage == 1){
                     i++;
-                    break;
-                }
+                break;
             }
             case 1:{
                 gui.NewClass();
-                if (guistage == 2){
-                    i++;
-                    break;
-                }
+                i++;
+                break;
             }
         }
     }
@@ -91,7 +76,6 @@ public class Control {
                 userclass = console.userClass();
                 info = person.UserClass(userclass, userid);
                 level = Integer.parseInt(info[5]);
-                // System.out.println(info[5]);
                 i++;
                 break;
             }
@@ -108,7 +92,7 @@ public class Control {
                     else if (m == 'w')
                         game.moveRight();
                     else
-                        System.out.println("choose");
+                        System.out.println("choose the correct value");
                 }
                 i++;
                 
@@ -124,8 +108,15 @@ public class Control {
     }
     public static void updateClass(String name){
         userclass = name;
-        person.UserClass(userclass, userid);
+        info = person.UserClass(userclass, userid);
+        level = Integer.parseInt(info[5]);
         guistage++;
         i++;
+    }
+    public static int getuser(){
+        return userid;
+    }
+    public static int getlevel(){
+        return level;
     }
 }

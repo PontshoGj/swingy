@@ -51,7 +51,6 @@ public class User{
                 break;
             }
             case "mage":{
-                System.out.println(id);
                 conn.insertClass(id,"mage", 45, 10, 80);
                 log.wirteLog("mage:45:10:80");
                 log.wirteLog("");
