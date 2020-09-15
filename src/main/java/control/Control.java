@@ -4,6 +4,7 @@ import model.tracker.*;
 import model.data.*;
 import view.gui.*;
 import view.console.*;
+import javax.validation.Valid;
 
 
 public class Control {
@@ -21,6 +22,7 @@ public class Control {
     private static int      level = 0;
     private static String [] info = null;
     private static GameControl game = GameControl.getInc();
+    
     private Control(){}
 
     public static Control getInc(){
@@ -64,39 +66,45 @@ public class Control {
     }
 
     public static void consoleview(){
-        switch (i){
-            case 0:{
-                username = console.newUser();
-                userid = person.UserName(username);
-                i++;
-                break;
-            }
-            case 1:{
-                person.options();
-                userclass = console.userClass();
-                info = person.UserClass(userclass, userid);
-                level = Integer.parseInt(info[5]);
-                i++;
-                break;
-            }
-            case 2:{
-                game.level(level);
-                while (game.getPlay()){
-                    char m = console.move();
-                    if (m == 'n')
-                        game.moveUp();
-                    else if (m == 's')
-                        game.moveDown();
-                    else if (m == 'e')
-                        game.moveLeft();
-                    else if (m == 'w')
-                        game.moveRight();
-                    else
-                        System.out.println("choose the correct value");
+        try {
+            switch (i){
+                case 0:{
+                    // @Valid
+                    username = console.newUser();
+                    // BindingResult result;
+                    userid = person.UserName(username);
+                    i++;
+                    break;
                 }
-                i++;
-                
+                case 1:{
+                    person.options();
+                    userclass = console.userClass();
+                    info = person.UserClass(userclass, userid);
+                    level = Integer.parseInt(info[5]);
+                    i++;
+                    break;
+                }
+                case 2:{
+                    game.level(level);
+                    while (game.getPlay()){
+                        char m = console.move();
+                        if (m == 'n')
+                            game.moveUp();
+                        else if (m == 's')
+                            game.moveDown();
+                        else if (m == 'e')
+                            game.moveLeft();
+                        else if (m == 'w')
+                            game.moveRight();
+                        else
+                            System.out.println("choose the correct value");
+                    }
+                    i++;
+                    
+                }
             }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 

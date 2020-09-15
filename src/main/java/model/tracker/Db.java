@@ -137,4 +137,25 @@ public class Db{
         }
         return null;
     }
+
+    public static String [][] getPlay() {
+        // PreparedStatement pstmt = null;
+        try { 
+            String sqlQuery = "SELECT * FROM player";
+
+            Statement  stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+            String      data[][];
+            int         i = 0;
+            while(rs.next()){
+
+                data[i++][0]  = new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + "",};
+            }
+            if (data != null)
+                return data;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }

@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import control.*;
+import model.tracker.*;
 
 public class Gui extends JFrame {
 
-    // private static JPanel       f   = new JPanel();
     private boolean startV = true;
     private boolean NewV = false;
     private static final int	SCREEN_HEIGHT = 500;
@@ -38,6 +38,8 @@ public class Gui extends JFrame {
     private static JFrame       frame = new JFrame("My First GUI");
     private static GameControl  game = GameControl.getInc();
     private static Control      control = Control.getInc();
+    private static Db       conn = new Db(); 
+
     public void Gui(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
@@ -168,9 +170,27 @@ public class Gui extends JFrame {
         this.setVisible(true);
     }
 
+    //get and list available players for play to select
     public void SelectUser(){
         this.getContentPane().removeAll();
-        this.repaint(); 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
+        this.repaint();
+        String       columns[] = {"id","Name","Classes", "attack", "defense", "hp"};
+        String       datas[][] = conn.getPlay();
+        JTable       PlayTable = new JTable(datas, columns){
+            public boolean editCellAt(int row, int column, java.util.EventObject e){
+                return false;
+            }
+        };
+        PlayTable.addMouseListner(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+                System.out.println(e.getSource());
+            }
+        });
+        JScrollPane  sps = new JScrollPane(PlayTable); 
+        this.getContentPane().add(sps); // Adds Button to content pane of frame
+        this.setVisible(true);
     }
     
     public void SwitchViews(){

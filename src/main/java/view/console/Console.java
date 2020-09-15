@@ -8,13 +8,14 @@ import view.gui.*;
 import control.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 
 public class Console {
     private static Db           conn = new Db();
     private static GameControl  game = GameControl.getInc();
     @NotNull(message = "Name cannot be null")
+    @NotBlank(message = "Name cannot be null")
     private String              name;
     public void start (){
         System.out.println("u -- New user: ");
