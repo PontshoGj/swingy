@@ -148,7 +148,7 @@ public class Db{
             ResultSet rss = stmt.executeQuery("SELECT count(*) FROM player");
             int count = 1;
             if (rss.next())
-                count = rss.getInt("count");
+                count = rss.getInt("count(*)");
             String[][]      data= new String[count][1];
             int         i = 0;
             while(rs.next()){
