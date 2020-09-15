@@ -145,11 +145,15 @@ public class Db{
 
             Statement  stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
-            String      data[][];
+            ResultSet rss = stmt.executeQuery("SELECT count(*) FROM player");
+            int count = 1;
+            if (rss.next())
+                count = rss.getInt("count");
+            String[][]      data= new String[count][1];
             int         i = 0;
             while(rs.next()){
 
-                data[i++][0]  = new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + "",};
+                data[i++]  = new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + "",};
             }
             if (data != null)
                 return data;

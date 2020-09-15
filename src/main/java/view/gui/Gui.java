@@ -3,6 +3,8 @@ package view.gui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.*;
 import control.*;
 import model.tracker.*;
 
@@ -183,7 +185,9 @@ public class Gui extends JFrame {
                 return false;
             }
         };
-        PlayTable.addMouseListner(new MouseAdapter(){
+        PlayTable.setFocusable(false);
+        PlayTable.addMouseListener(new MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent e){
                 System.out.println(e.getSource());
             }
