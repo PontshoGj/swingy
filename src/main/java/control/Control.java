@@ -133,7 +133,8 @@ public class Control {
     public static void setuser(int id){
         info = person.getplayer(id);
         level = Integer.parseInt(info[5]);
-        userid = Integer.parseInt(info[0]);
+        System.out.println(id);
+        userid = id;
     }
     // public static int setlevel(){
 
