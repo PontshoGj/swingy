@@ -138,7 +138,7 @@ public class Gui extends JFrame {
                 game.moveUp();
                 Gameplay();
                 if (!game.getPlay())
-                    conn.updateXp();
+                    // conn.updateXp();
                     System.exit(0);
             }
         });
@@ -147,7 +147,7 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e){
                 game.moveDown();
                 if (!game.getPlay())
-                    conn.updateXp();
+                    // conn.updateXp();
                     System.exit(0);
                 Gameplay();
             }
@@ -157,7 +157,7 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e){
                 game.moveLeft();
                 if (!game.getPlay())
-                    conn.updateXp();
+                    // conn.updateXp();
                     System.exit(0);
                 Gameplay();
             }
@@ -167,7 +167,7 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e){
                 game.moveRight();
                 if (!game.getPlay())
-                    conn.updateXp();
+                    // conn.updateXp();
                     System.exit(0);
                 Gameplay();
             }
@@ -198,7 +198,7 @@ public class Gui extends JFrame {
                 JTable value = (JTable)e.getSource();
                 int row = value.getSelectedRow();
                 int column = value.getSelectedRow();
-                int vl = PlayTable.getValueAt(row, column);
+                int vl = Integer.parseInt(PlayTable.getValueAt(row, column).toString());
                 control.setuser(vl);
                 game.level(control.getlevel());
                 Gameplay();

@@ -165,7 +165,7 @@ public class Db{
     }
 
     public static void updateXp(int xp, int level, int id){
-        
+
         if (xp >= 1 && xp < 2450)
             level = 1;
         else if (xp >= 2450 && xp < 4800)
@@ -183,7 +183,7 @@ public class Db{
         try { 
             String sqlQuery = "UPDATE player SET xp = ?, level = ? WHERE id = ?";
             PreparedStatement pstmt = getConnection().prepareStatement(sqlQuery); 
-            pstmt.setString(1, newxp);
+            pstmt.setInt(1, newxp);
             pstmt.setInt(2, level);
             pstmt.setInt(3, id);
             pstmt.executeUpdate();
