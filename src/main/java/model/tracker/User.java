@@ -65,7 +65,9 @@ public class User{
         }
         return conn.getPlayInfo(id);
     }
-
+    public String[] getplayer(int id){
+        return conn.getPlayInfo(id);
+    }
     public void options(){
         System.out.println("Classes:\tattack\tdefense\thp");
         System.out.println("Warrior\t\t40\t20\t100");

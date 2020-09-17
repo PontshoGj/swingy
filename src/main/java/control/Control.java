@@ -5,7 +5,10 @@ import model.data.*;
 import view.gui.*;
 import view.console.*;
 import javax.validation.Valid;
-
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 public class Control {
 
@@ -127,4 +130,15 @@ public class Control {
     public static int getlevel(){
         return level;
     }
+    public static void setuser(int id){
+        info = person.getplayer(id);
+        level = Integer.parseInt(info[5]);
+        userid = Integer.parseInt(info[0]);
+    }
+    // public static int setlevel(){
+
+    // }
+    // public static void setid(){
+
+    // }
 }

@@ -9,7 +9,10 @@ import control.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
-
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 public class Console {
     private static Db           conn = new Db();

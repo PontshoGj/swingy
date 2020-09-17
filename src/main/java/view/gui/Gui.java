@@ -40,7 +40,7 @@ public class Gui extends JFrame {
     private static JFrame       frame = new JFrame("My First GUI");
     private static GameControl  game = GameControl.getInc();
     private static Control      control = Control.getInc();
-    private static Db       conn = new Db(); 
+    private static Db           conn = new Db(); 
 
     public void Gui(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -138,6 +138,7 @@ public class Gui extends JFrame {
                 game.moveUp();
                 Gameplay();
                 if (!game.getPlay())
+                    conn.updateXp();
                     System.exit(0);
             }
         });
@@ -146,6 +147,7 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e){
                 game.moveDown();
                 if (!game.getPlay())
+                    conn.updateXp();
                     System.exit(0);
                 Gameplay();
             }
@@ -155,6 +157,7 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e){
                 game.moveLeft();
                 if (!game.getPlay())
+                    conn.updateXp();
                     System.exit(0);
                 Gameplay();
             }
@@ -164,6 +167,7 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e){
                 game.moveRight();
                 if (!game.getPlay())
+                    conn.updateXp();
                     System.exit(0);
                 Gameplay();
             }
@@ -178,8 +182,9 @@ public class Gui extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
         this.repaint();
-        String       columns[] = {"id","Name","Classes", "attack", "defense", "hp"};
+        String       columns[] = {"id","Name","Classes", "attack", "defense", "hp", "level", "xp"};
         String       datas[][] = conn.getPlay();
+        // System.out.println(datas[0][1]);
         JTable       PlayTable = new JTable(datas, columns){
             public boolean editCellAt(int row, int column, java.util.EventObject e){
                 return false;
@@ -189,7 +194,15 @@ public class Gui extends JFrame {
         PlayTable.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                System.out.println(e.getSource());
+                // System.out.println(e.getSource());
+                JTable value = (JTable)e.getSource();
+                int row = value.getSelectedRow();
+                int column = value.getSelectedRow();
+                int vl = PlayTable.getValueAt(row, column);
+                control.setuser(vl);
+                game.level(control.getlevel());
+                Gameplay();
+                // System.out.println(PlayTable.getValueAt(row, column));
             }
         });
         JScrollPane  sps = new JScrollPane(PlayTable); 

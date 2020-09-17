@@ -143,12 +143,13 @@ public class Db{
         try { 
             String sqlQuery = "SELECT * FROM player";
 
+            Statement  stmts = getConnection().createStatement();
+            ResultSet rs = stmts.executeQuery(sqlQuery);
             Statement  stmt = getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sqlQuery);
             ResultSet rss = stmt.executeQuery("SELECT count(*) FROM player");
-            int count = 1;
+            int count = 0;
             if (rss.next())
-                count = rss.getInt("count");
+                count = rss.getInt("count(*)");
             String[][]      data= new String[count][1];
             int         i = 0;
             while(rs.next()){
@@ -161,5 +162,34 @@ public class Db{
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public static void updateXp(int xp, int level, int id){
+        
+        if (xp >= 1 && xp < 2450)
+            level = 1;
+        else if (xp >= 2450 && xp < 4800)
+            level = 2;
+        else if (xp >= 4800 && xp < 8050)
+            level = 3;
+        else if (xp >= 8050 && xp < 12200)
+            level = 4;
+        else
+            level = 5;
+
+        int val = level * 1000 + (level - 1) * 450;
+        int newxp = xp + val;
+
+        try { 
+            String sqlQuery = "UPDATE player SET xp = ?, level = ? WHERE id = ?";
+            PreparedStatement pstmt = getConnection().prepareStatement(sqlQuery); 
+            pstmt.setString(1, newxp);
+            pstmt.setInt(2, level);
+            pstmt.setInt(3, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
