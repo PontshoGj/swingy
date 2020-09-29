@@ -49,6 +49,8 @@ public class Console {
         System.out.println("Enter your name: ");
         Scanner inputname = new Scanner(System.in);
         name = inputname.nextLine();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         return name;
     }
 
@@ -70,7 +72,8 @@ public class Console {
         System.out.println("Press n or s or e or w to move:");
         Scanner inputclass = new Scanner(System.in);
         char heroClass = inputclass.next().charAt(0);
-
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         return (heroClass);
     }
 }

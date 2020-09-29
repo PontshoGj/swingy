@@ -25,7 +25,7 @@ public class User{
     }
 
     public String [] UserClass(String userclass, int id){
-        switch (userclass){
+        switch (userclass.toLowerCase()){
             case "warrior":{
                 conn.insertClass(id,"warrior", 40, 20, 100);
                 log.wirteLog("warrior:40:20:100");

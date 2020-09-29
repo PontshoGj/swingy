@@ -82,6 +82,8 @@ public class Control {
                 case 1:{
                     person.options();
                     userclass = console.userClass();
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     info = person.UserClass(userclass, userid);
                     level = Integer.parseInt(info[5]);
                     i++;
@@ -133,7 +135,7 @@ public class Control {
     public static void setuser(int id){
         info = person.getplayer(id);
         level = Integer.parseInt(info[5]);
-        System.out.println(id);
+        // System.out.println(id);
         userid = id;
     }
     // public static int setlevel(){

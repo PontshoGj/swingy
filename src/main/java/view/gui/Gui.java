@@ -24,7 +24,7 @@ public class Gui extends JFrame {
     private static JButton      NextButton = new JButton("Next"); 
     private static JButton      StartButton = new JButton("Start"); 
     private static JLabel       NameLabel = new JLabel("Enter a name");
-    private static JLabel       ClassLabel = new JLabel("Enter a class");
+    private static JLabel       ClassLabel = new JLabel("Select class from list");
     private static JTextField   NameTextField = new JTextField();
     private static JTextField   ClassTextField = new JTextField();
     private static String       data[][] = {{"Warrior", "40", "20", "100"},
@@ -95,7 +95,7 @@ public class Gui extends JFrame {
         NextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 NewClass();
-                control.updateName("Pontsho");
+                control.updateName(NameTextField.getText());
             }
         });
         this.getContentPane().add(NextButton); // Adds Button to content pane of frame
@@ -108,20 +108,47 @@ public class Gui extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(this.SCREEN_HEIGHT,this.SCREEN_WIDTH);
         this.repaint();
-        this.getContentPane().setLayout(new GridLayout(4, 1)); // Adds Button to content pane of frame
+        this.getContentPane().setLayout(new GridLayout(2, 1)); // Adds Button to content pane of frame
         this.getContentPane().add(ClassLabel); // Adds Button to content pane of frame
         // ClassLabel.setCellSelectionEnabled(true);  
-        this.getContentPane().add(sp); // Adds Button to content pane of frame
-        this.getContentPane().add(ClassTextField); // Adds Button to content pane of frame
 
-        StartButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                control.updateClass("mage");
+        JTable       PlayTable = new JTable(data, column){
+            public boolean editCellAt(int row, int column, java.util.EventObject e){
+                return false;
+            }
+        };
+        PlayTable.setFocusable(false);
+        PlayTable.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                // System.out.println(e.getSource());
+                JTable value = (JTable)e.getSource();
+                int row = value.getSelectedRow();
+                int column = value.getSelectedRow();
+                // int vl = Integer.parseInt(PlayTable.getValueAt(row, column).toString());
+                // control.setuser(vl);
+                // game.level(control.getlevel());
+                // Gameplay();
+                control.updateClass(PlayTable.getValueAt(row, column).toString());
                 game.level(control.getlevel());
                 Gameplay();
+                // System.out.println(PlayTable.getValueAt(row, column));
             }
         });
-        this.getContentPane().add(StartButton); // Adds Button to content pane of frame
+        JScrollPane  sps = new JScrollPane(PlayTable); 
+        this.getContentPane().add(sps);
+        
+        // this.getContentPane().add(sp); // Adds Button to content pane of frame
+        // this.getContentPane().add(ClassTextField); // Adds Button to content pane of frame
+
+        // StartButton.addActionListener(new ActionListener(){
+        //     public void actionPerformed(ActionEvent e){
+        //         control.updateClass("mage");
+        //         game.level(control.getlevel());
+        //         Gameplay();
+        //     }
+        // });
+        // this.getContentPane().add(StartButton); // Adds Button to content pane of frame
 
         this.setVisible(true);
 
