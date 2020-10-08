@@ -131,7 +131,7 @@ public class Db{
             Statement  stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
             if (rs.next())
-                return (new String []{rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + "",});
+                return (new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + ""});
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -154,7 +154,7 @@ public class Db{
             int         i = 0;
             while(rs.next()){
 
-                data[i++]  = new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + "",};
+                data[i++]  = new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + ""};
             }
             if (data != null)
                 return data;
@@ -181,15 +181,43 @@ public class Db{
         int newxp = xp + val;
 
         try { 
-            String sqlQuery = "UPDATE player SET xp = ?, level = ? WHERE id = ?";
+            String sqlQuery = "UPDATE player SET xp = ? WHERE id = ?";
             PreparedStatement pstmt = getConnection().prepareStatement(sqlQuery); 
             pstmt.setInt(1, newxp);
-            pstmt.setInt(2, level);
-            pstmt.setInt(3, id);
+            // pstmt.setInt(2, level);
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    public static void updateLevel(int level, int id){
+        level++;
+        try { 
+            String sqlQuery = "UPDATE player SET level = ? WHERE id = ?";
+            PreparedStatement pstmt = getConnection().prepareStatement(sqlQuery); 
+            pstmt.setInt(1, level);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static int getlevel(int id) {
+        // PreparedStatement pstmt = null;
+        try { 
+            String sqlQuery = "SELECT * FROM player WHERE id = " + id;
+
+            Statement  stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+            if (rs.next())
+                return  rs.getInt("level");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 }

@@ -20,7 +20,7 @@ public class User{
     public int UserName(String name){
         int i  = conn.newPlayer(name);
         // System.out.println(i);
-        log.wirteLog(name);
+        // log.wirteLog(name);
         return i;
     }
 
@@ -28,41 +28,42 @@ public class User{
         switch (userclass.toLowerCase()){
             case "warrior":{
                 conn.insertClass(id,"warrior", 40, 20, 100);
-                log.wirteLog("warrior:40:20:100");
-                log.wirteLog("");
+                // log.wirteLog("warrior:40:20:100");
+                // log.wirteLog("");
                 break;
             }
             case "shaman":{
                 conn.insertClass(id,"shaman", 30, 15, 90);
-                log.wirteLog("shaman:30:15:90");
-                log.wirteLog("");
+                // log.wirteLog("shaman:30:15:90");
+                // log.wirteLog("");
                 break;
             }
             case "priest":{
                 conn.insertClass(id,"priest", 25, 25, 90);
-                log.wirteLog("priest:25:25:90");
-                log.wirteLog("");
+                // log.wirteLog("priest:25:25:90");
+                // log.wirteLog("");
                 break;
             }
             case "paladin":{
                 conn.insertClass(id,"paladin", 40, 30, 120);
-                log.wirteLog("paladin:40:30:120");
-                log.wirteLog("");
+                // log.wirteLog("paladin:40:30:120");
+                // log.wirteLog("");
                 break;
             }
             case "mage":{
                 conn.insertClass(id,"mage", 45, 10, 80);
-                log.wirteLog("mage:45:10:80");
-                log.wirteLog("");
+                // log.wirteLog("mage:45:10:80");
+                // log.wirteLog("");
                 break;
             }
             case "hunter":{
                 conn.insertClass(id,"hunter", 25, 20, 110);
-                log.wirteLog("hunter:25:20:110");
-                log.wirteLog("");
+                // log.wirteLog("hunter:25:20:110");
+                // log.wirteLog("");
                 break;
             }
         }
+        
         return conn.getPlayInfo(id);
     }
     public String[] getplayer(int id){

@@ -125,11 +125,7 @@ public class Gui extends JFrame {
                 JTable value = (JTable)e.getSource();
                 int row = value.getSelectedRow();
                 int column = value.getSelectedRow();
-                // int vl = Integer.parseInt(PlayTable.getValueAt(row, column).toString());
-                // control.setuser(vl);
-                // game.level(control.getlevel());
-                // Gameplay();
-                control.updateClass(PlayTable.getValueAt(row, column).toString());
+                control.updateClass(PlayTable.getValueAt(row, column - column).toString());
                 game.level(control.getlevel());
                 Gameplay();
                 // System.out.println(PlayTable.getValueAt(row, column));
@@ -138,18 +134,6 @@ public class Gui extends JFrame {
         JScrollPane  sps = new JScrollPane(PlayTable); 
         this.getContentPane().add(sps);
         
-        // this.getContentPane().add(sp); // Adds Button to content pane of frame
-        // this.getContentPane().add(ClassTextField); // Adds Button to content pane of frame
-
-        // StartButton.addActionListener(new ActionListener(){
-        //     public void actionPerformed(ActionEvent e){
-        //         control.updateClass("mage");
-        //         game.level(control.getlevel());
-        //         Gameplay();
-        //     }
-        // });
-        // this.getContentPane().add(StartButton); // Adds Button to content pane of frame
-
         this.setVisible(true);
 
     }
@@ -162,7 +146,7 @@ public class Gui extends JFrame {
         this.getContentPane().add(PositionLabel); // Adds Button to content pane of frame
         NButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                game.moveUp();
+                game.moveUp(control.getlevel(), control.id());
                 Gameplay();
                 if (!game.getPlay())
                     // conn.updateXp();
@@ -172,7 +156,7 @@ public class Gui extends JFrame {
         this.getContentPane().add(NButton); // Adds Button to content pane of frame
         SButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                game.moveDown();
+                game.moveDown(control.getlevel(), control.id());
                 if (!game.getPlay())
                     // conn.updateXp();
                     System.exit(0);
@@ -182,7 +166,7 @@ public class Gui extends JFrame {
         this.getContentPane().add(SButton); // Adds Button to content pane of frame
         WButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                game.moveLeft();
+                game.moveLeft(control.getlevel(), control.id());
                 if (!game.getPlay())
                     // conn.updateXp();
                     System.exit(0);
@@ -192,7 +176,7 @@ public class Gui extends JFrame {
         this.getContentPane().add(WButton); // Adds Button to content pane of frame
         EButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                game.moveRight();
+                game.moveRight(control.getlevel(), control.id());
                 if (!game.getPlay())
                     // conn.updateXp();
                     System.exit(0);

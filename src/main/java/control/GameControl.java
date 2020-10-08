@@ -15,6 +15,8 @@ public class GameControl {
     private static GameControl  gamecontrol = null;
     private static int          midpoint = 0;
     private static boolean      play = true;
+    private static Control      control = Control.getInc();
+    private static Db           conn = new Db();
 
     private GameControl() {}
     
@@ -43,39 +45,63 @@ public class GameControl {
         limitVirt = map;
     }
 
-    public static void moveUp (){
+    public static void moveUp (int level, int id){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+            // System.out.println("aaa");
+            conn.updateLevel(level, id);
+            control.updatelevel();
+
+            play = false;
+        }else if(control.getlevel() >= 7){
+        }
         int newValues = start.get(0)[0] - 1;
         int oldValue = start.get(0)[1];
         start = new ArrayList<>();
         start.add(new int[]{newValues, oldValue});
-        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == 9 || start.get(0)[1] == 9)
-            play = false;
     }
 
-    public static void moveDown (){
+    public static void moveDown (int level, int id){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+            // System.out.println("aaa");
+            conn.updateLevel(level, id);
+            control.updatelevel();
+
+            play = false;
+        }else if(control.getlevel() >= 7){
+        }
         int newValues = start.get(0)[0] + 1;
         int oldValue = start.get(0)[1];
         start = new ArrayList<>();
         start.add(new int[]{newValues, oldValue});
-        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt)
-            play = false;
     }
 
-    public static void moveLeft (){
+    public static void moveLeft (int level,int id){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+            // System.out.println("aaa");
+            conn.updateLevel(level, id);
+            control.updatelevel();
+            
+            play = false;
+        }else if(control.getlevel() >= 7){
+        }
         int newValues = start.get(0)[1] - 1;
         int oldValue = start.get(0)[0];
         start = new ArrayList<>();
         start.add(new int[]{oldValue, newValues});
-        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == limitVirt || start.get(0)[1] == limitVirt)
-            play = false;
     }
 
-    public static void moveRight (){
+    public static void moveRight (int level, int id){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+            // System.out.println("aaa");
+            conn.updateLevel(level, id);
+            control.updatelevel();
+
+            play = false;
+        }else if(control.getlevel() >= 7){
+        }
         int newValues = start.get(0)[1] + 1;
         int oldValue = start.get(0)[0];
         start = new ArrayList<>();
         start.add(new int[]{oldValue, newValues});
-        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] == limitVirt || start.get(0)[1] == limitVirt)
-            play = false;
     }
 }

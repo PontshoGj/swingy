@@ -25,6 +25,7 @@ public class Control {
     private static int      level = 0;
     private static String [] info = null;
     private static GameControl game = GameControl.getInc();
+    private static Db           conn = new Db();
     
     private Control(){}
 
@@ -37,19 +38,62 @@ public class Control {
         if (args.equals("gui")){
             views = "gui";
             gui.start();
-        }else{
-            views = "console";
-            console.start();
         }
-        while (i < 3){
-            switch (views){
-                case "console":{
-                    consoleview();
-                    break;
+        else{
+            views = console.start();
+            while (i < 3){
+                switch (views){
+                    case "console":{
+                        consoleview();
+                        break;
+                    }
+                    case "select":{
+                        selectview();
+                        // i = 5;
+                        break;
+                    }
                 }
+                if (views == null || views == "gui")
+                    break;
             }
-            if (views == null || views == "gui")
+        }
+    }
+
+    public static void selectview (){
+        try{
+        switch (i){
+            case 0:{
+                console.selecUser();
+                int num = console. getplayernum();
+                setuser(num);
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+                i++;
                 break;
+            }
+            case 1:{
+                game.level(level);
+                while (game.getPlay()){
+                    char m = console.move();
+                    if (m == 'n')
+                        game.moveUp(level, userid);
+                    else if (m == 's')
+                        game.moveDown(level, userid);
+                    else if (m == 'e')
+                        game.moveLeft(level, userid);
+                    else if (m == 'w')
+                        game.moveRight(level, userid);
+                    else
+                        System.out.println("choose the correct value");
+                }
+                i++;
+                System.exit(0);
+                // break;   
+            }
+        }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
     
@@ -85,7 +129,9 @@ public class Control {
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
                     info = person.UserClass(userclass, userid);
-                    level = Integer.parseInt(info[5]);
+                    // System.out.println("SSSS");
+                    // System.out.println(info[4]);
+                    level = Integer.parseInt(info[6]);
                     i++;
                     break;
                 }
@@ -94,13 +140,13 @@ public class Control {
                     while (game.getPlay()){
                         char m = console.move();
                         if (m == 'n')
-                            game.moveUp();
+                            game.moveUp(level, userid);
                         else if (m == 's')
-                            game.moveDown();
+                            game.moveDown(level, userid);
                         else if (m == 'e')
-                            game.moveLeft();
+                            game.moveLeft(level, userid);
                         else if (m == 'w')
-                            game.moveRight();
+                            game.moveRight(level, userid);
                         else
                             System.out.println("choose the correct value");
                     }
@@ -121,8 +167,9 @@ public class Control {
     }
     public static void updateClass(String name){
         userclass = name;
+        System.out.println(name);
         info = person.UserClass(userclass, userid);
-        level = Integer.parseInt(info[5]);
+        level = Integer.parseInt(info[6]);
         guistage++;
         i++;
     }
@@ -134,14 +181,15 @@ public class Control {
     }
     public static void setuser(int id){
         info = person.getplayer(id);
-        level = Integer.parseInt(info[5]);
+        level = Integer.parseInt(info[6]);
         // System.out.println(id);
         userid = id;
     }
-    // public static int setlevel(){
-
-    // }
-    // public static void setid(){
-
-    // }
+    public static int id(){
+        return userid;
+    }
+    public static void updatelevel(){
+        level = conn.getlevel(userid);
+        conn.updateXp(Integer.parseInt(info[7]),level, userid);
+    }
 }

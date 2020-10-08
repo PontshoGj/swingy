@@ -1,4 +1,4 @@
-package view.console;
+ package view.console;
 
 import model.tracker.*;
 import java.util.Scanner;
@@ -17,10 +17,12 @@ import javax.validation.ValidatorFactory;
 public class Console {
     private static Db           conn = new Db();
     private static GameControl  game = GameControl.getInc();
+    
     @NotNull(message = "Name cannot be null")
     @NotBlank(message = "Name cannot be null")
     private String              name;
-    public void start (){
+
+    public String start (){
         System.out.println("u -- New user: ");
         System.out.println("s -- Select user: ");
         System.out.println("v -- Switch views: ");
@@ -30,18 +32,21 @@ public class Console {
             case "u":{
                 // User person = new User();
                 // person.createUser();
-                break;
+                return "console";
+                // break;
             }
             case "s":
-                selecUser();
-                System.exit(1);
-                break;
-            case "v":{
-                Gui gui = new Gui();
-                gui.start();
-                break;
-            }
+                return "select";
+                // selecUser();
+                // System.exit(1);
+                // break;
+            // case "v":{
+            //     Gui gui = new Gui();
+            //     gui.start();
+            //     break;
+            // }
         }
+        return "console";
     }
 
     public String newUser(){
@@ -53,7 +58,6 @@ public class Console {
         System.out.flush();
         return name;
     }
-
     public String userClass(){
         
         Scanner inputclass = new Scanner(System.in);
@@ -63,8 +67,16 @@ public class Console {
 
     public void selecUser(){
         conn.getPlayers();
+
+        // int player = input.
     }
 
+    public int getplayernum(){
+        System.out.println("Please enter the number to select player");
+        Scanner input = new Scanner(System.in);
+        int num = Integer.parseInt(input.next());
+        return num;
+    }
     public char move(){
         int Y = game.getPositionY();
         int X = game.getPositionX();
