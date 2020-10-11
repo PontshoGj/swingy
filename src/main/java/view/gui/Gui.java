@@ -77,7 +77,7 @@ public class Gui extends JFrame {
                 SwitchViews();
             }
         });
-        this.getContentPane().add(SwitchButton); 
+        // this.getContentPane().add(SwitchButton); 
 
         // frame.pack();
         this.setVisible(this.startV);
@@ -94,8 +94,14 @@ public class Gui extends JFrame {
 
         NextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                NewClass();
-                control.updateName(NameTextField.getText());
+                if (NameTextField.getText() == null || NameTextField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(frame, "Please enter name");
+                }else{
+
+                    NewClass();
+
+                    control.updateName(NameTextField.getText());
+                }
             }
         });
         this.getContentPane().add(NextButton); // Adds Button to content pane of frame

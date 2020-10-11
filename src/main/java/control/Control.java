@@ -168,7 +168,7 @@ public class Control {
     }
     public static void updateClass(String name){
         userclass = name;
-        System.out.println(name);
+        // System.out.println(name);
         info = person.UserClass(userclass, userid);
         level = Integer.parseInt(info[6]);
         guistage++;
