@@ -25,7 +25,7 @@ public class Console {
     public String start (){
         System.out.println("u -- New user: ");
         System.out.println("s -- Select user: ");
-        System.out.println("v -- Switch views: ");
+        // System.out.println("v -- Switch views: ");
         Scanner input = new Scanner(System.in);
         String choice = input.nextLine();
         switch (choice){
@@ -45,6 +45,12 @@ public class Console {
             //     gui.start();
             //     break;
             // }
+            default:{
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+                System.out.println("Please enter the correct value");
+                String retry = start();
+            }
         }
         return "console";
     }
@@ -56,6 +62,11 @@ public class Console {
         name = inputname.nextLine();
         System.out.print("\033[H\033[2J");
         System.out.flush();
+        if (name == null || name.isEmpty())
+        {
+            System.out.println("Plaese Enter name");
+            String lm = newUser();
+        }
         return name;
     }
     public String userClass(){
@@ -72,9 +83,15 @@ public class Console {
     }
 
     public int getplayernum(){
-        System.out.println("Please enter the number to select player");
-        Scanner input = new Scanner(System.in);
-        int num = Integer.parseInt(input.next());
+        int num = 0;
+        try{
+            System.out.println("Please enter the number to select player");
+            Scanner input = new Scanner(System.in);
+            num = input.nextInt();
+            
+        }catch(Exception e){
+            System.out.println("Plaese enter the correct number");
+        }
         return num;
     }
     public char move(){

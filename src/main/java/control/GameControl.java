@@ -46,13 +46,12 @@ public class GameControl {
     }
 
     public static void moveUp (int level, int id){
-        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+        if (start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt){
             // System.out.println("aaa");
             conn.updateLevel(level, id);
             control.updatelevel();
 
             play = false;
-        }else if(control.getlevel() >= 7){
         }
         int newValues = start.get(0)[0] - 1;
         int oldValue = start.get(0)[1];
@@ -61,13 +60,12 @@ public class GameControl {
     }
 
     public static void moveDown (int level, int id){
-        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt)){
             // System.out.println("aaa");
             conn.updateLevel(level, id);
             control.updatelevel();
 
             play = false;
-        }else if(control.getlevel() >= 7){
         }
         int newValues = start.get(0)[0] + 1;
         int oldValue = start.get(0)[1];
@@ -76,13 +74,12 @@ public class GameControl {
     }
 
     public static void moveLeft (int level,int id){
-        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt)){
             // System.out.println("aaa");
             conn.updateLevel(level, id);
             control.updatelevel();
             
             play = false;
-        }else if(control.getlevel() >= 7){
         }
         int newValues = start.get(0)[1] - 1;
         int oldValue = start.get(0)[0];
@@ -91,13 +88,12 @@ public class GameControl {
     }
 
     public static void moveRight (int level, int id){
-        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt) && control.getlevel() < 7){
+        if ((start.get(0)[0] == 0 || start.get(0)[1] == 0 || start.get(0)[0] > limitVirt || start.get(0)[1] > limitVirt)){
             // System.out.println("aaa");
             conn.updateLevel(level, id);
             control.updatelevel();
 
             play = false;
-        }else if(control.getlevel() >= 7){
         }
         int newValues = start.get(0)[1] + 1;
         int oldValue = start.get(0)[0];

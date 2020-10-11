@@ -4,9 +4,15 @@ import data.*;
 import java.util.Scanner;
 import java.sql.*;  
 import model.*;
+import view.console.*;
+import control.*;
+
 public class User{
     private static Db       conn = new Db(); 
     private static Logs     log = new Logs().getLogs(); 
+    private static Console  console = new Console();
+    private static Control      control = Control.getInc();
+
     public void createUser(){
         options();
     }
@@ -62,12 +68,23 @@ public class User{
                 // log.wirteLog("");
                 break;
             }
+            default:{
+                System.out.println("Please select the correct class");
+                userclass = console.userClass();
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+                UserClass(userclass, id);
+            }
         }
         
         return conn.getPlayInfo(id);
     }
     public String[] getplayer(int id){
-        return conn.getPlayInfo(id);
+        String [] i = conn.getPlayInfo(id);
+        // if (i == null){
+        //     control.setuser(id);
+        // }
+        return i;
     }
     public void options(){
         System.out.println("Classes:\tattack\tdefense\thp");

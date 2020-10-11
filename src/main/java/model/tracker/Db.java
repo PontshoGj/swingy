@@ -106,8 +106,9 @@ public class Db{
 
             Statement  stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
+            int i = 0;
             while(rs.next()){
-
+                i = 1;
                 System.out.println(rs.getInt("id") + "\t" + rs.getString("name") + "\t" + 
                                     rs.getString("classname") + "\t" + 
                                     rs.getInt("attack") + "\t" + 
@@ -115,6 +116,10 @@ public class Db{
                                     rs.getInt("hp") + "\t" +
                                     rs.getInt("level") + "\t" +
                                     rs.getInt("xp"));
+            }
+            if (i == 0){
+                System.out.println("Please create player first");
+                System.exit(0);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -133,8 +138,9 @@ public class Db{
             if (rs.next())
                 return (new String []{""+rs.getInt("id")+"", rs.getString("name"), rs.getString("classname"), "" + rs.getInt("attack") + "", "" + rs.getInt("defence") + "", "" + rs.getInt("hp") + "", "" + rs.getInt("level") + "", "" + rs.getInt("xp") + ""});
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Please enter correct number");
         }
+        System.out.println("Please enter correct number");
         return null;
     }
 

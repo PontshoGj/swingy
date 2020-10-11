@@ -64,8 +64,9 @@ public class Control {
         switch (i){
             case 0:{
                 console.selecUser();
-                int num = console. getplayernum();
+                int num = console.getplayernum();
                 setuser(num);
+                System.out.println(num);
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
                 i++;
@@ -181,8 +182,9 @@ public class Control {
     }
     public static void setuser(int id){
         info = person.getplayer(id);
-        level = Integer.parseInt(info[6]);
-        // System.out.println(id);
+        // if (Integer.parseInt(info[6]) != null)
+            level = Integer.parseInt(info[6]);
+        // System.out.println(info[6]);
         userid = id;
     }
     public static int id(){
