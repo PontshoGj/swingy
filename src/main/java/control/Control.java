@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 public class Control {
 
@@ -26,7 +27,7 @@ public class Control {
     private static String [] info = null;
     private static GameControl game = GameControl.getInc();
     private static Db           conn = new Db();
-    
+
     private Control(){}
 
     public static Control getInc(){
@@ -118,9 +119,17 @@ public class Control {
             switch (i){
                 case 0:{
                     // @Valid
+                    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+                    Validator   validator = factory.getValidator();
+
                     username = console.newUser();
                     // BindingResult result;
                     userid = person.UserName(username);
+                    Set<ConstraintViolation<User>> constraintViolation = validator.validate(person);
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+
+                    // System.out.println(constraintViolation.size());
                     i++;
                     break;
                 }
@@ -162,7 +171,16 @@ public class Control {
 
     public static void updateName(String name){
         username = name;
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator   validator = factory.getValidator();
+
         userid = person.UserName(username);
+
+        Set<ConstraintViolation<User>> constraintViolation = validator.validate(person);
+        // System.out.println(constraintViolation.size());
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        
         guistage++;
         i++;
     }

@@ -6,13 +6,15 @@ import java.sql.*;
 import model.*;
 import view.console.*;
 import control.*;
+import javax.validation.constraints.NotBlank;;
 
 public class User{
     private static Db       conn = new Db(); 
     private static Logs     log = new Logs().getLogs(); 
     private static Console  console = new Console();
     private static Control      control = Control.getInc();
-
+    @NotBlank(message="name not empty")
+    private String   names;
     public void createUser(){
         options();
     }
@@ -24,7 +26,8 @@ public class User{
 
 
     public int UserName(String name){
-        int i  = conn.newPlayer(name);
+        names = name;
+        int i  = conn.newPlayer(names);
         // System.out.println(i);
         // log.wirteLog(name);
         return i;

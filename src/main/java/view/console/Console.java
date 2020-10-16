@@ -18,8 +18,8 @@ public class Console {
     private static Db           conn = new Db();
     private static GameControl  game = GameControl.getInc();
     
-    @NotNull(message = "Name cannot be null")
-    @NotBlank(message = "Name cannot be null")
+    // @NotNull(message = "Name cannot be null")
+    // @NotBlank(message = "Name cannot be null")
     private String              name;
 
     public String start (){
